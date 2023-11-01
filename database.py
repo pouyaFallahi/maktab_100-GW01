@@ -73,6 +73,6 @@ class Database:
         self.execute(sql)
 
 
-
+ 
 x = Database()
 x.update()
