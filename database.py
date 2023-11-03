@@ -7,10 +7,10 @@ class Database:
         try:
             self.connection = psycopg2.connect(
                 host="localhost",
-                port="5432",
-                database="hospital",
-                user="pouya",
-                password="1234",
+                port="YOUR_PORT",
+                database="NAME_DATABASE",
+                user="POSTGERSQL_USERNAME",
+                password="YOUR_PASSWORD",
             )
             self.cursor = self.connection.cursor()
 
