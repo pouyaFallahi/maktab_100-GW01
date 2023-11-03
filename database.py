@@ -8,9 +8,9 @@ class Database:
             self.connection = psycopg2.connect(
                 host="localhost",
                 port="5432",
-                database="project",
-                user="postgres",
-                password="alisamiee_postgres",
+                database="hospital",
+                user="pouya",
+                password="1234",
             )
             self.cursor = self.connection.cursor()
 
@@ -75,4 +75,22 @@ class Database:
 
  
 x = Database()
-x.update()
+
+#CREATE TABLE PATIENT
+#x.create('patient',patient_id="INT PRIMARY KEY", patient_name="VARCHAR(150) NOT NULL", patient_age ="INT NOT NULL", patient_cos="INT")
+
+
+#CREATE TABLE ADMIN
+#x.create('admin', admin_name="VARCHAR(15) NOT NULL", userName="VARCHAR(100)", password="VARCHAR(100)")
+
+
+#CREATE TABLE PATIENT_FILE
+#x.create("patient_file", file_id="INT PRIMARY KEY", patient_id="INT", docter_id="INT", data_timeVisit="timestamp", patient_history="TEXT" )
+#it -> FOREIGN KEY
+#ALTER TABLE patient_file ADD CONSTRAINT patient_id FOREIGN KEY (patient_id) REFERENCES patient (patient_id); -> FOREIGN KEY
+
+#CREATE TABLE DOCTOR
+#x.create("docter", docter_id="INT PRIMARY KEY", docter_name="VARCHAR(150)", docter_age="INT", working_day="VARCHAR(100)", salary="INT NOT NULL")
+
+#CREATE TABLE VISIT
+#x.create("visit", visit_id="INT PRIMARY KEY", patient_id="INT NOT NULL", docter_id="INT NOT NULL", date_visit="TIMESTAMP", order_visit="TEXT", cost_visit="INT" )
