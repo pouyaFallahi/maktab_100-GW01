@@ -12,13 +12,13 @@ class DatabaseTest(unittest.TestCase):
 
     def test_create(self):
         values = {
-            'admin_name': 'VARCHAR(255)',
+            'admin_name': 'VARCHAR(255) NOT NULL',
             'username': 'VARCHAR(255)',
             'password': 'VARCHAR(255)'
         }
         self.obj.create("pateint", **values)
         
-        expected_query = "CREATE TABLE IF NOT EXISTS pateint (admin_name VARCHAR(255), username VARCHAR(255), password VARCHAR(255));"
+        expected_query = "CREATE TABLE IF NOT EXISTS pateint (admin_name VARCHAR(255) NOT NULL, username VARCHAR(255), password VARCHAR(255));"
         self.obj.cursor.execute.assert_called_once_with(expected_query)
         self.obj.connection.commit.assert_called_once()
 
