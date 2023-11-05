@@ -1,21 +1,21 @@
-import unittest
-import sqlite3
+import unittest, sqlite3, logging
+from logger_file import Logger, log_function
 
 # Replace 'your_database.db' with your actual database file
 DATABASE_FILE = 'your_database.db'
 
 
 class TestDatabase(unittest.TestCase):
-
+    @log_function(Logger('Use setUp function'), log_level=logging.INFO)
     def setUp(self):
         # Set up a database connection and cursor before each test
         self.conn = sqlite3.connect(DATABASE_FILE)
         self.cursor = self.conn.cursor()
-
+    @log_function(Logger('Use tearDown function'), log_level=logging.INFO)
     def tearDown(self):
         # Clean up resources after each test
         self.conn.close()
-
+    @log_function(Logger('Use test function'), log_level=logging.INFO)
     def test_table_exists(self):
         # Test if a specific table exists in the database
         table_name = 'your_table_name'
@@ -24,6 +24,7 @@ class TestDatabase(unittest.TestCase):
         result = self.cursor.fetchone()
         self.assertIsNotNone(result)
 
+    @log_function(Logger('Use test function'), log_level=logging.INFO)
     def test_data_insertion(self):
         # Test data insertion into the database
         data = ("John", "Doe", 30)

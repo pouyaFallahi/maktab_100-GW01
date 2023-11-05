@@ -1,8 +1,8 @@
-import psycopg2
-import DBManager
-
+import psycopg2, logging
+from logger_file import Logger, log_function
 
 class Database:
+    @log_function(Logger('Create object in Database'), log_level=logging.INFO, message='Use Database')
     def __init__(self):
         try:
             self.connection = psycopg2.connect(
@@ -17,6 +17,7 @@ class Database:
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
+    @log_function(Logger('Use create function'), log_level=logging.INFO, message='User use create function')
     def create(self, table_name : str, **values : dict) -> None:
         '''This method creates database tables for us.'''
 
@@ -25,7 +26,7 @@ class Database:
 
         self.cursor.execute(query_for_create_patient_table)
         self.connection.commit()
-
+    @log_function(Logger('Use insert function'), log_level=logging.INFO, message='User use insert function')
     def insert(self, table_name : str, **values : dict) -> None:
         '''To create and enter new information'''
         query = "INSERT INTO {0} ({1}) VALUES ".format(table_name, ", ".join(str(key) for key in values.keys()))
@@ -42,7 +43,7 @@ class Database:
 
         self.cursor.execute(query)
         self.connection.commit()
-
+    @log_function(Logger('Use update function'), log_level=logging.INFO, message='User use update function')
     def update(self, table: str, condition: str = None, **sets):
         '''To change and edit registered information'''
         parsed_values = []
@@ -61,7 +62,7 @@ class Database:
         else:
             sql += ";"
         self.execute(sql)
-
+    @log_function(Logger('Use delete function'), log_level=logging.INFO, message='User use delete function')
     def delete(self, table: str, condition: str) -> None:
         '''To clear table information'''
         sql = "DELETE FROM %s " % table
@@ -74,7 +75,7 @@ class Database:
 
 
  
-x = Database()
+# x = Database()
 
 #CREATE TABLE PATIENT
 #x.create('patient',patient_id="INT PRIMARY KEY", patient_name="VARCHAR(150) NOT NULL", patient_age ="INT NOT NULL", patient_cos="INT")

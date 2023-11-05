@@ -20,9 +20,9 @@ def Logger(my_logger):
     logger.addHandler(filehandler)
     return logger
 
-@log_function(Logger('tezt'), log_level=logging.CRITICAL, message='dorod br too')
-def example_function(x, y):
-    result = x + y
-    return result
-
-result = example_function(2, 3)
+# @log_function(Logger('tezt'), log_level=logging.CRITICAL, message='dorod br too')
+# def example_function(x, y):
+#     result = x + y
+#     return result
+#
+# result = example_function(2, 3)
