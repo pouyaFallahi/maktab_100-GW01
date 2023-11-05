@@ -1,2 +1,2 @@
 psycopg2==2.9.9
-
+databases==0.7
