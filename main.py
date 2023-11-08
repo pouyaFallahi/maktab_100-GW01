@@ -1,8 +1,13 @@
-import loging
+import logging
 from menu import Menu, Item
 from loging import Loging_Admin, Loging_Patient, Logging_docter
 from logger_file import Logger, log_function
+from admin import Admin
 
+
+# import os
+#
+# os.system('cls')
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def patient():
     patient_menu = Menu("Patient Menu")
@@ -12,6 +17,7 @@ def patient():
     patient_menu.add_item(contact_us_item)
     patient_menu.display()
     patient_menu.execute()
+
 
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def doctor():
@@ -23,15 +29,17 @@ def doctor():
     doctor_menu.display()
     doctor_menu.execute()
 
+
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def admin():
-   admin_menu = Menu('Admin Menu')
-   register_item_admin = Item('sign or login', register_login_admin)
-   contact_us_item = Item('contact_us', contact_us)
-   admin_menu.add_item(register_item_admin)
-   admin_menu.add_item(contact_us_item)
-   admin_menu.display()
-   admin_menu.execute()
+    admin_menu = Menu('Admin Menu')
+    register_item_admin = Item('sign or login', register_login_admin)
+    contact_us_item = Item('contact_us', contact_us)
+    admin_menu.add_item(register_item_admin)
+    admin_menu.add_item(contact_us_item)
+    admin_menu.display()
+    admin_menu.execute()
+
 
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def register_admin():
@@ -40,9 +48,11 @@ def register_admin():
     password = input('enter your password: ')
     admin_name = input('enter your admin name: ')
     la = Loging_Admin()
-    print(la.register(user_name, password, admin_name))
+    if la.register(user_name, password, admin_name):
+        admin_item()
     register_admin_meni.display()
     register_admin_meni.execute()
+
 
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def register_patient():
@@ -50,10 +60,11 @@ def register_patient():
     patient_name = input('pls enter your name: ')
     patient_id = int(input('pls enter your id: '))
     age = int(input('enter your age: '))
-    lp= Loging_Patient()
+    lp = Loging_Patient()
     print(lp.register(patient_id, patient_name, age))
     register_user_menu.display()
     register_user_menu.execute()
+
 
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def register_docter():
@@ -68,15 +79,19 @@ def register_docter():
     register_doctor_menu.display()
     register_doctor_menu.execute()
 
+
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def loging_admin():
     loging_admin_menu = Menu('Admin Menu')
     user_name = input('enter your user_name: ')
     password = input('enter your password: ')
     la = Loging_Admin()
-    print(la.loging(user_name, password))
+    if la.loging(user_name, password):
+        admin_item()
+
     loging_admin_menu.display()
     loging_admin_menu.execute()
+
 
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def loging_patient():
@@ -88,6 +103,7 @@ def loging_patient():
     loging_patient_menu.display()
     loging_patient_menu.execute()
 
+
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def loging_docter():
     loging_docter_menu = Menu('Docter Menu')
@@ -98,6 +114,7 @@ def loging_docter():
     loging_docter_menu.display()
     loging_docter_menu.execute()
 
+
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def register_loging_patient():
     register_loging_patient_menu = Menu('register loging patient')
@@ -107,8 +124,9 @@ def register_loging_patient():
     register_loging_patient_menu.add_item(register_item)
     register_loging_patient_menu.display()
     register_loging_patient_menu.execute()
-    
- @log_function(Logger('Use main functions'), log_level=logging.INFO)   
+
+
+@log_function(Logger('Use main functions'), log_level=logging.INFO)
 def register_login_docter():
     register_login_docter_menu = Menu('register loging Doctor')
     loging_item = Item('Loging', loging_docter)
@@ -117,6 +135,7 @@ def register_login_docter():
     register_login_docter_menu.add_item(register_item)
     register_login_docter_menu.display()
     register_login_docter_menu.execute()
+
 
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def register_login_admin():
@@ -127,11 +146,28 @@ def register_login_admin():
     register_login_admin_menu.add_item(register_item)
     register_login_admin_menu.display()
     register_login_admin_menu.execute()
-    
+
+def admin_item():
+    obj = Admin()
+    ai = Menu("Admin Menu")
+    salary_docter_item = Item("show sum salary docter", obj.sum_salary_docter)
+    list_patient_item = Item("list patient", obj.list_patient)
+    list_docter_item = Item("list docters", obj.list_docter)
+    visit_each_docter_by_patient_item = Item('visit docter', obj.visit_each_docter_by_patient)
+    visit_each_patient = Item('visit each patient', obj.visit_each_patient)
+    incoming_hospital = Item('incoming hospital', obj.incoming_hospital)
+    ai.add_item(salary_docter_item)
+    ai.add_item(list_patient_item)
+    ai.add_item(list_docter_item)
+    ai.add_item(visit_each_docter_by_patient_item)
+    ai.add_item(visit_each_patient)
+    ai.add_item(incoming_hospital)
+    ai.display()
+    ai.execute()
+
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def contact_us():
     print('a work from maktab sharifs 100th cycle ,group 2')
-
 
 
 menu = Menu("Main")
@@ -142,7 +178,6 @@ item_admin = Item('Admin', admin)
 menu.add_item(item_patient)
 menu.add_item(item_doctor)
 menu.add_item(item_admin)
-
 
 menu.display()
 menu.execute()
