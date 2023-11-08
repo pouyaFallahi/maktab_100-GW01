@@ -1,9 +1,8 @@
 import loging
 from menu import Menu, Item
 from loging import Loging_Admin, Loging_Patient, Logging_docter
-# import os
-#
-# os.system('cls')
+from logger_file import Logger, log_function
+
 @log_function(Logger('Use main functions'), log_level=logging.INFO)
 def patient():
     patient_menu = Menu("Patient Menu")
